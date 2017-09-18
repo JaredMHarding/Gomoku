@@ -1,0 +1,63 @@
+import java.util.Stack;
+
+public class Gomoku {
+	// instance variables
+	private Stack<Move> history;
+	private int[][] boardState;
+	private boolean turn;
+
+	// boardState keywords
+	public final int EMPTY = 0;
+	public final int WHITE = 1;
+	public final int BLACK = 2;
+
+	// turn keywords
+	public final boolean WHITETURN = true;
+	public final boolean BLACKTURN = false;
+	
+	/**
+	 * Constructor
+	 */
+	public Gomoku() {
+		boardState = new int[15][15];
+		turn = BLACKTURN;
+	}
+	
+	/**
+	 * makes a move on the board.
+	 * @param x the x coodinate (0-14)
+	 * @param y the y coodinate (0-14)
+	 */
+	public int makeMove(int x, int y) {
+		if (turn == BLACKTURN) {
+			boardState[x][y] = BLACK;
+		}
+		else {
+			boardState[x][y] = WHITE;
+		}
+		history.push(new Move(x,y));
+		int whoWon = winCheck(x,y);
+		turn = !turn;
+		return whoWon;
+	}
+	
+	private int winCheck(int x, int y) {
+		
+		return 0;
+	}
+	
+	/**
+	 * Nested class for Gomoku, used for our history stack.
+	 * @author apipes
+	 *
+	 */
+	private class Move {
+		public int x;
+		public int y;
+		
+		public Move(int x,int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+}

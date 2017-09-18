@@ -1,0 +1,41 @@
+import java.util.Stack;
+
+public class Gomoku {
+	private Stack<Move> history;
+	private int[][] boardState;
+	private boolean turn;
+
+	public final int EMPTY = 0;
+	public final int WHITE = 1;
+	public final int BLACK = 2;
+
+	public final boolean WHITETURN = true;
+	public final boolean BLACKTURN = false;
+	
+	public Gomoku() {
+		boardState = new int[15][15];
+		turn = BLACKTURN;
+	}
+	
+	public void makeMove(int x, int y) {
+		if (turn == BLACKTURN) {
+			boardState[x][y] = BLACK;
+		}
+		else {
+			boardState[x][y] = WHITE;
+		}
+		Move newMove = new Move(x,y);
+		history.push(newMove);
+		turn = !turn;
+	}
+	
+	private class Move {
+		public int x;
+		public int y;
+		
+		public Move(int x,int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+}
