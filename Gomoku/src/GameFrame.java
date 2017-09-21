@@ -1,6 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +14,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class GameFrame extends JFrame {
@@ -40,6 +48,9 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 732, 807);
 		
+	
+		
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -57,6 +68,18 @@ public class GameFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		GameBoard panel = new GameBoard();
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				System.out.println(e.getX()+","+e.getY());
+				
+				int column = (int) Math.round(e.getX()/40.0) - 1;
+				int row = (int) Math.round(e.getY()/40.0) - 1;
+				
+				System.out.println(column+","+row);
+				
+			}
+		});
 		panel.setBounds(46, 31, 640, 640);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -73,4 +96,6 @@ public class GameFrame extends JFrame {
 		btnNewButton_2.setBounds(541, 699, 117, 45);
 		contentPane.add(btnNewButton_2);
 	}
+	
+	
 }

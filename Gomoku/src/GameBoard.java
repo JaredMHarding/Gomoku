@@ -1,5 +1,9 @@
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
@@ -13,24 +17,25 @@ public class GameBoard extends JPanel {
 	public void paint(Graphics g){
 		super.paint(g); //call primary paint method
 		
-			//DRAW ROW LINES
-			int rowindex=1;
-			while(rowindex<16){
-				g.drawLine(getWidth()/16, rowindex*(getHeight()/16), (getWidth())-getWidth()/16, rowindex*(getHeight()/16));
-				rowindex++;
-			}
-			//Example on how to draw the first few rows manually
-			//g.drawLine(0, getHeight()/16, getWidth(), getHeight()/16);
-			//g.drawLine(0, 2*(getHeight()/16), 2*(getWidth()), 2*(getHeight()/16));
+		int index=1;
+		while(index<16){
+			g.drawLine(getWidth()/16, index*(getHeight()/16), (getWidth())-getWidth()/16, index*(getHeight()/16));
+			g.drawLine(index*(getWidth()/16), (getHeight()/16), index*(getWidth()/16), getHeight()-getHeight()/16);
+			index++;
+		}	
+		
+		final BufferedImage image;
+		
+		try {
+			image = ImageIO.read(new File("./white.png"));
+			g.drawImage(image,(0+1)*40-20, (2+1)*40-20, null);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 			
-			//DRAW COL LINES
-			int colindex=1;
-			while(colindex<16){
-				g.drawLine(colindex*(getWidth()/16), (getHeight()/16), colindex*(getWidth()/16), getHeight()-getHeight()/16);
-				colindex++;
-			}
+					
 			
-			//g.drawLine(getWidth()/3, 0, getWidth()/3, getHeight());
 	}
 	
 	public GameBoard() {
