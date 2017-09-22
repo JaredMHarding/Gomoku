@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
@@ -61,6 +62,15 @@ public class GameFrame extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Quit");
+		mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?",null,JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,13 +81,21 @@ public class GameFrame extends JFrame {
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				System.out.println(e.getX()+","+e.getY());
-				
+				if (panel.mainBoard.getGameWon()) {
+					return;
+				}
 				int column = (int) Math.round(e.getX()/40.0) - 1;
 				int row = (int) Math.round(e.getY()/40.0) - 1;
-				
-				System.out.println(column+","+row);
-				
+				if (column>=0 && column<15 && row>=0 && row<15) {
+					int result = panel.mainBoard.makeMove(column, row);
+					if (panel.mainBoard.BLACK == result) {
+						JOptionPane.showMessageDialog(null, "Black Won!");
+					}
+					else if (panel.mainBoard.WHITE == result) {
+						JOptionPane.showMessageDialog(null, "White Won!");
+					}
+				}
+				repaint();
 			}
 		});
 		panel.setBounds(46, 31, 640, 640);
@@ -85,14 +103,40 @@ public class GameFrame extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Restart");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				panel.mainBoard = new Gomoku();
+				repaint();
+			}
+		});
 		btnNewButton.setBounds(58, 699, 117, 45);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (panel.mainBoard.getGameWon()) {
+					return;
+				}
+				panel.mainBoard.moveBack();
+				repaint();
+			}
+		});
 		btnNewButton_1.setBounds(305, 699, 117, 45);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Quit");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?",null,JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
 		btnNewButton_2.setBounds(541, 699, 117, 45);
 		contentPane.add(btnNewButton_2);
 	}

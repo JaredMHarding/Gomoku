@@ -5,6 +5,7 @@ public class Gomoku {
 	private Stack<Move> history;
 	private int[][] boardState;
 	private int turn;
+	private boolean gameWon;
 
 	// boardState keywords
 	public final int EMPTY = 0;
@@ -20,7 +21,9 @@ public class Gomoku {
 	 */
 	public Gomoku() {
 		boardState = new int[15][15];
+		history = new Stack<Move>();
 		turn = BLACK;
+		gameWon = false;
 	}
 	
 	/**
@@ -29,6 +32,10 @@ public class Gomoku {
 	 * @param y the y coodinate (0-14)
 	 */
 	public int makeMove(int x, int y) {
+		// check if theres a piece already there
+		if (boardState[x][y] != EMPTY) {
+			return EMPTY;
+		}
 		// place the piece
 		if (turn == BLACK) {
 			boardState[x][y] = BLACK;
@@ -51,9 +58,12 @@ public class Gomoku {
 		return whoWon;
 	}
 	/**
+	 * Returns values to indicate if somebody won.
+	 * Gomoku.BLACK if black won, Gomoku.WHITE if white won,
+	 * Gomoku.EMPTY if the game has not ended yet
 	 * 
-	 * @param x the x coodinate of the move (0-14)
-	 * @param y the y coodinate (0-14)
+	 * @param x the x coordinate of the move (0-14)
+	 * @param y the y coordinate (0-14)
 	 * @return 
 	 */
 	private int winCheck(int x, int y) {
@@ -65,9 +75,10 @@ public class Gomoku {
 		i = x-4;
 		j = y;
 		while (i <= x+4) {
-			if ((i<=0) && (i<15)) {
+			if ((i>=0) && (i<15)) {
 				if (boardState[i][j] == turn) {
 					if (++runs == 5) {
+						gameWon = true;
 						return turn;
 					}
 				}
@@ -83,9 +94,10 @@ public class Gomoku {
 		i = x;
 		j = y-4;
 		while (j <= y+4) {
-			if ((j<=0) && (j<15)) {
+			if ((j>=0) && (j<15)) {
 				if (boardState[i][j] == turn) {
 					if (++runs == 5) {
+						gameWon = true;
 						return turn;
 					}
 				}
@@ -93,7 +105,7 @@ public class Gomoku {
 					runs = 0;
 				}
 			}
-			i++;
+			j++;
 		}
 		
 		// check northwest to southeast diagonal wins
@@ -101,9 +113,10 @@ public class Gomoku {
 		i = x-4;
 		j = y-4;
 		while (i <= x+4) { // no need to test for j
-			if ((i<=0) && (i<15) && (j<=0) && (j<15)) {
+			if ((i>=0) && (i<15) && (j>=0) && (j<15)) {
 				if (boardState[i][j] == turn) {
 					if (++runs == 5) {
+						gameWon = true;
 						return turn;
 					}
 				}
@@ -119,9 +132,10 @@ public class Gomoku {
 		i = x-4;
 		j = y+4;
 		while (i <= x+4) { // no need to test for j
-			if ((i<=0) && (i<15) && (j<=0) && (j<15)) {
+			if ((i>=0) && (i<15) && (j>=0) && (j<15)) {
 				if (boardState[i][j] == turn) {
 					if (++runs == 5) {
+						gameWon = true;
 						return turn;
 					}
 				}
@@ -132,7 +146,6 @@ public class Gomoku {
 			i++;
 			j--;
 		}
-		
 		// No win
 		return EMPTY;
 	}
@@ -146,6 +159,29 @@ public class Gomoku {
 		}
 		Move prev = history.pop();
 		boardState[prev.x][prev.y] = EMPTY;
+		if (turn == WHITE) {
+			turn = BLACK;
+		}
+		else if (turn == BLACK) {
+			turn = WHITE;
+		}
+	}
+	/**
+	 * Returns the state of the space indicated by the arguments
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public int getState(int x, int y) {
+		return boardState[x][y];
+	}
+	/**
+	 * Returns whether or not the game has been won
+	 * @return
+	 */
+	public boolean getGameWon() {
+		return gameWon;
 	}
 	
 	/**
