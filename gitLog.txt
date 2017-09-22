@@ -1,0 +1,37 @@
+commit 922708a877522d6e72b5b861252fb3e8771fea8f
+Author: Adam W Pipes <apipes@ecs325-13.labs.encs>
+Date:   Thu Sep 21 18:38:12 2017 -0700
+
+    Driver: Adam; Navigator: Jared; Project is complete. All game functions completed including background changing.
+
+commit 16602d9a159d5381a78bec3630c89828667edaa5
+Author: Adam W Pipes <apipes@ecs325-13.labs.encs>
+Date:   Thu Sep 21 17:46:59 2017 -0700
+
+    Driver: Jared; Navigator: Adam; Implemented a working game.
+    Pieces can be placed, wins are detected, and all the buttons work properly.
+    Final functionality to implement is the background image change.
+
+commit b4fa3c54157eb9ae5ff39d8ded3c905e46c0202e
+Author: Adam W Pipes <apipes@ecs325-13.labs.encs>
+Date:   Thu Sep 21 15:50:12 2017 -0700
+
+    Driver: Adam Pipes; Navigator: Jared Harding; Wrote code to draw game piece images. Refactored our gameboard draw. Added mouse event handling.
+
+commit 1b3faeb86976e240cc8dc1d226ae406224925b81
+Author: Adam W Pipes <apipes@ecs325-15.labs.encs>
+Date:   Sun Sep 17 18:33:23 2017 -0700
+
+    Driver: Jared; Navigator: Adam; Made the Gomoku class, holds all the game data and methods.
+
+commit 98378e0545de403e2a8938884f52bd55e68719c0
+Author: Adam W Pipes <apipes@ecs325-15.labs.encs>
+Date:   Sun Sep 17 16:01:40 2017 -0700
+
+    Driver: Adam; Navigator: Jared; Created a game board skeleton, the buttons and grid don't do anything yet.
+
+commit 60d7a18eeb1554f851470146cd265c4234210532
+Author: Adam W Pipes <apipes@ecs325-15.labs.encs>
+Date:   Sun Sep 17 15:49:06 2017 -0700
+
+    Driver: Jared Harding; Navigator: Adam Pipes; Initial commit.
