@@ -71,8 +71,7 @@ public class GameFrame extends JFrame {
 		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panel.toggleBackground();
-				repaint();
+				//panel.currentImage = 1;
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);

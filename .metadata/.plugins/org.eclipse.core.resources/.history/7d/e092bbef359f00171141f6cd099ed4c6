@@ -53,14 +53,6 @@ public class GameFrame extends JFrame {
 	
 		
 		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		GameBoard panel = new GameBoard();
-		
-
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -71,8 +63,7 @@ public class GameFrame extends JFrame {
 		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				panel.toggleBackground();
-				repaint();
+				panel.currentImage = 1;
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
@@ -88,8 +79,12 @@ public class GameFrame extends JFrame {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		
+		GameBoard panel = new GameBoard();
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {

@@ -13,8 +13,7 @@ public class GameBoard extends JPanel {
 	private BufferedImage blackPiece;
 	private BufferedImage whitePiece;
 	private BufferedImage[] bgImages;
-	private int currentImage;
-	//private BufferedImage test;
+	private BufferedImage test;
 	
 	/**
 	 * Create the panel.
@@ -22,27 +21,24 @@ public class GameBoard extends JPanel {
 	
 	public GameBoard() {
 		mainBoard = new Gomoku();
-		
 		try {
 			blackPiece = ImageIO.read(new File("./black.png"));
 			whitePiece = ImageIO.read(new File("./white.png"));
 			bgImages = new BufferedImage[3];
-			bgImages[0] = ImageIO.read(new File("./bg1.jpg"));
-			bgImages[1] = ImageIO.read(new File("./bg2.jpg"));
-			bgImages[2] = ImageIO.read(new File("./bg3.jpg"));
-			//test = ImageIO.read(new File("./bg3.png"));
+			bgImages[0] = ImageIO.read(new File("./bg1.png"));
+			bgImages[1] = ImageIO.read(new File("./bg2.png"));
+			bgImages[2] = ImageIO.read(new File("./bg3.png"));
+			test = ImageIO.read(new File("./bg3.png"));
 			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		currentImage = 0;
 	}
 	
 	public void paint(Graphics g){
 		super.paint(g); //call primary paint method
 		
-		g.drawImage(bgImages[currentImage],0 ,0 ,null);
+		g.drawImage(test,0 ,0 ,null);
 		
 		int index=1;
 		while(index<16){
@@ -79,10 +75,6 @@ public class GameBoard extends JPanel {
 			
 					
 			
-	}
-	
-	public void toggleBackground(){
-		currentImage = (currentImage + 1)%3;
 	}
 
 }
